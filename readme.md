@@ -1,5 +1,4 @@
-## Laravel PHP Framework
-##Sistema Base para proyectos
+##Sistema Cancionero
 
 Desarrollado con el framework [Laravel website](http://laravel.com/docs).
 
