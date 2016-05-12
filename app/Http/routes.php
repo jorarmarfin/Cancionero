@@ -12,17 +12,17 @@
 */
 
 Route::get('/', [
-	 'uses' => 'Auth\AuthController@getLogin',
-	 'as' => 'login'
+	'uses' =>'HomeController@index',
+	'as' => '/'
 	]);
 
 /**
  * Rutas del home
  */
 Route::group(['middleware'=> 'auth'], function() {
-	Route::get('home', [
-	'uses' =>'HomeController@index',
-	'as' => 'home'
+	Route::get('admin', [
+	'uses' =>'AdminController@index',
+	'as' => 'admin'
 	]);
 
 });
