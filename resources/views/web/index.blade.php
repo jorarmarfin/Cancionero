@@ -97,9 +97,9 @@
                             </div>
                             <div class="col-md-3">
 	                            <div class="menu-item light-red">
-		                            <a href="{{route('login')}}" >
+		                            <a href="#" >
 		                                <i class="fa fa-user"></i>
-		                                <p>Login</p>
+		                                <p>Seccion</p>
 		                            </a>
 		                        </div>
                             </div>

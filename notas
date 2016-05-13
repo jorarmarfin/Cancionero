@@ -1,0 +1,5 @@
+Base de datos
+-------------
+php artisan make:model modelo -m : este -m me crea la migracion tambien a la vez
+php artisan make:seeder
+php artisan make:migration

@@ -17,7 +17,7 @@ Route::get('/', [
 	]);
 
 /**
- * Rutas del home
+ * Rutas del Administrador
  */
 Route::group(['middleware'=> 'auth'], function() {
 	Route::get('admin', [

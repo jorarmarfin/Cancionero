@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cancion;
+use App\Catalogo;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +19,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $Totalcancion = Cancion::all()->count();
+        // dd($Totalcancion);
+        return view('admin.index',compact('Totalcancion'));
     }
 
     /**
