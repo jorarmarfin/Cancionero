@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cancion;
 
 use App\Cancion;
 use App\Catalogo;
+
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AdminController extends Controller
+class CancionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +20,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $TotalCancion = Cancion::all()->count();
-        $TotalSecciones = Catalogo::getSecciones()->count();
-        $TotalTemas = Catalogo::getTemas()->count();
-        // dd($TotalTemas);
-        return view('admin.index',compact('TotalCancion','TotalSecciones','TotalTemas'));
+        $Lista = Cancion::getSongs('titulo');
+        $Secciones = Catalogo::getSecciones()->lists('nombre', 'codigo')->toarray();
+        // dd($Secciones->toArray());
+        return view('admin.cancion.list',compact('Lista','Secciones'));
     }
 
     /**
@@ -44,7 +44,10 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $song = new Cancion($data);
+        $song->save();
+        return redirect()->route('admin.cancion.index')->with('success','Se ha registrado satisfactoriamente');
     }
 
     /**
@@ -66,7 +69,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $song = Cancion::findOrFail($id);
+        $Secciones = Catalogo::getSecciones()->lists('nombre', 'codigo')->toarray();
+
     }
 
     /**
@@ -90,5 +95,11 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function gettema($id)
+    {
+        $tema = Catalogo::getTemas($id)->get();
+        return $tema;
     }
 }

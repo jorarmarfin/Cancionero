@@ -6,7 +6,7 @@
 @stop
 
 @section('titulo')
-este es mi titulo de head
+Cancionero | Tuya es mi alabanza
 @stop
 
 @section('nombreusuario')
@@ -32,13 +32,13 @@ Al sistema de administración
 
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>{{$Totalcancion}}</h3>
+              <h3>{{$TotalCancion}}</h3>
               <p>Alfabetico</p>
             </div>
             <div class="icon">
               <i class="fa fa-font"></i>
             </div>
-            <a href="#" class="small-box-footer">Mas <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('admin.cancion.index')}}" class="small-box-footer">Mas <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -46,14 +46,14 @@ Al sistema de administración
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3>{{$TotalSecciones}}</h3>
 
               <p>Secciones</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">Mas <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -61,14 +61,14 @@ Al sistema de administración
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{$TotalTemas}}</h3>
 
               <p>Temas</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">Mas <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

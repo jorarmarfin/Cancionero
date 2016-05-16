@@ -28,6 +28,14 @@ class CatalogoTableSeeder extends Seeder
                 'activo'=> TRUE
             ]);
         factory(App\Catalogo::class)->create([
+                'idtable'=> 0,
+                'iditem'=> 2,
+                'codigo'=> 'SECCIONES',
+                'nombre'=> 'SECCIONES',
+                'descripcion'=> 'SECCIONES',
+                'activo'=> TRUE
+            ]);
+        factory(App\Catalogo::class)->create([
                 'idtable'=> 1,
                 'iditem'=> 1,
                 'codigo'=> 'admin',

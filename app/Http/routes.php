@@ -27,6 +27,16 @@ Route::group(['middleware'=> 'auth'], function() {
 
 });
 
+Route::group(['prefix'=>'admin','middleware'=>['auth'],'namespace'=>'Cancion'],function(){
+
+	Route::resource('cancion','CancionController');
+});
+
+Route::get('tema/{id}', [
+	'uses' =>'Cancion\CancionController@gettema',
+	'as' => 'tema/{id}'
+	]);
+
 
 // Authentication routes...
 Route::get('login', [
