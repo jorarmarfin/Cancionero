@@ -53,7 +53,7 @@ Al sistema de administración
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">Mas <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('admin.seccion.index')}}" class="small-box-footer">Mas <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -66,7 +66,7 @@ Al sistema de administración
               <p>Temas</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+              <i class="fa fa-text-width"></i>
             </div>
             <a href="#" class="small-box-footer">Mas <i class="fa fa-arrow-circle-right"></i></a>
           </div>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cancion;
+use App\Catalogo;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,47 +22,41 @@ class HomeController extends Controller
         return view('web.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function alfabetico()
     {
-        //
+        $Lista = Cancion::getSongs('titulo');
+        return view('web.alfabetico',compact('Lista'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function songtheme($id)
     {
-        //
+        $Lista = Cancion::getSongTheme($id);
+        return view('web.alfabetico',compact('Lista'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function secciones()
     {
-        //
+        $Lista = Catalogo::getSecciones();
+        return view('web.secciones',compact('Lista'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function mostrar($id)
     {
-        //
+        $song = Cancion::findOrFail($id);
+        return view('web.mostrarcancion',compact('song'));
+    }
+
+    public function secciontema($id)
+    {
+        $codsec = Catalogo::findOrFail($id);
+        $Lista = Catalogo::getTemas($codsec->codigo)->get();
+        return view('web.temas',compact('Lista'));
+    }
+
+    public function temas()
+    {
+        $Lista = Catalogo::getTemas();
+        return view('web.temas',compact('Lista'));
     }
 
     /**

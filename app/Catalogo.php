@@ -40,17 +40,27 @@ class Catalogo extends Model
 						 ->get();
 	}
 	#--------------------------------------------------------------------
-	public function scopegetTemas($cadenaSQL,$id){
+	public function scopegetTemas($cadenaSQL,$id=null){
 		$idtable=$this->Maestro('SECCIONES');
-		$raw1 = DB::raw("SUBSTRING(codigo,1,2)");
-		$raw2 = DB::raw("SUBSTRING(codigo,3,2)");
-		$id=substr($id,0,2);
-		return $cadenaSQL->select('id','nombre')
-						 ->where('idtable',$idtable)
-						 ->where($raw1,$id)
-						 ->where($raw2,'<>','00')
-						 ->where('activo',1)
-						 ->orderBy('id');
+
+		if (isset($id)) {
+			$raw1 = DB::raw("SUBSTRING(codigo,1,2)");
+			$raw2 = DB::raw("SUBSTRING(codigo,3,2)");
+			$id=substr($id,0,2);
+			return $cadenaSQL->select('id','nombre')
+							 ->where('idtable',$idtable)
+							 ->where($raw1,$id)
+							 ->where($raw2,'<>','00')
+							 ->where('activo',1)
+							 ->orderBy('id');
+		} else {
+			return $cadenaSQL->where('idtable',$idtable)
+							 ->where(DB::raw('substring(codigo,3,2)'),'<>','00')
+							 ->where('activo',1)
+							 ->get();
+		}
+
+
 	}
 
 }

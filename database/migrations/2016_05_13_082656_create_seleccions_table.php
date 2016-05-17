@@ -14,6 +14,7 @@ class CreateSeleccionsTable extends Migration
     {
         Schema::create('seleccion', function (Blueprint $table) {
             $table->increments('id')->unique('pk_seleccion');
+            $table->string('nombre');
             $table->integer('idcancion')->unsigned();
             $table->integer('orden');
             $table->timestamps();

@@ -19,13 +19,6 @@ class UserTableSeeder extends Seeder
             'idrole' => '3',
 
             ]);
-        factory(App\User::class)->create([
-            'name' => 'Nelly Campos',
-            'email' => 'nelly.camposr@gmail.com',
-            'password' => bcrypt('biancaeresmimotivo'),
-            'idrole' => '4',
-
-            ]);
         // factory(App\User::class,10)->create();
     }
 }

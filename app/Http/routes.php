@@ -1,20 +1,17 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+/**
+ * Rutas web
+ */
+Route::get('/', ['uses' =>'HomeController@index','as' => '/']);
+Route::get('alfabetico', ['uses' =>'HomeController@alfabetico','as' => 'alfabetico']);
+Route::get('alfabetico/tema/{id}', ['uses' =>'HomeController@songtheme','as' => 'alfabetico.tema']);
+Route::get('secciones', ['uses' =>'HomeController@secciones','as' => 'secciones']);
+Route::get('seccion.tema/{id}', ['uses' =>'HomeController@secciontema','as' => 'seccion.tema']);
+Route::get('temas', ['uses' =>'HomeController@temas','as' => 'temas']);
+Route::get('mostrar/{id}', ['uses' =>'HomeController@mostrar','as' => 'mostrar']);
+Route::get('tema/{id}', ['uses' =>'Cancion\CancionController@gettema','as' => 'tema/{id}']);
 
-Route::get('/', [
-	'uses' =>'HomeController@index',
-	'as' => '/'
-	]);
 
 /**
  * Rutas del Administrador
@@ -30,12 +27,25 @@ Route::group(['middleware'=> 'auth'], function() {
 Route::group(['prefix'=>'admin','middleware'=>['auth'],'namespace'=>'Cancion'],function(){
 
 	Route::resource('cancion','CancionController');
+	Route::get('cancion/ver/{id}', [
+	'uses' =>'CancionController@verCancion',
+	'as' => 'admin.cancion.ver'
+	]);
+	Route::post('cancion/search', [
+	'uses' =>'CancionController@searchSong',
+	'as' => 'admin.cancion.search'
+	]);
+
+
 });
 
-Route::get('tema/{id}', [
-	'uses' =>'Cancion\CancionController@gettema',
-	'as' => 'tema/{id}'
-	]);
+Route::group(['prefix'=>'admin','middleware'=>['auth'],'namespace'=>'Seccion'],function(){
+
+	Route::resource('seccion','SeccionController');
+
+});
+
+
 
 
 // Authentication routes...

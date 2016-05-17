@@ -1,10 +1,11 @@
 @extends('layouts.admin')
 
 @section('links')
-<!-- bootstrap datepicker -->
-  <link rel="stylesheet" href={{asset("plugins/datepicker/datepicker3.css")}}>
-<!-- Bootstrap time Picker -->
-  <link rel="stylesheet" href={{asset("plugins/timepicker/bootstrap-timepicker.min.css")}}>
+
+@stop
+
+@section('titulo')
+Cancionero | Tuya es mi alabanza
 @stop
 
 @section('nombreusuario')
@@ -12,7 +13,7 @@
 @stop
 
 @section('titulopagina')
-Administracion de Prestamos
+Administracion de Canciones
 @stop
 
 @section('subtitulopagina')
@@ -20,25 +21,21 @@ Administracion de Prestamos
 @stop
 
 
-@section('titulocuerpo')
-Lista de Prestamos
-@stop
-
 @section('cuerpo')
-	{!!Form::model($prestamo,['route'=> ['prestamo.destroy',$prestamo],'method'=> 'DELETE','class'=>''])!!}
+	{!!Form::model($song,['route'=> ['admin.cancion.destroy',$song],'method'=> 'DELETE','class'=>''])!!}
 		@include('alerts.errors')
 		@include('alerts.success')
+		@include('alerts.warning')
 	<!-- Default box -->
       <div class="box box-primary">
         <div class="box-header with-border">
           <br>
           <h3 class="box-title">
           	<div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                Esta seguro que desea eliminar este prestamo no podra desahacer esta opcion
-              </div>
-          </h3>
+	            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+	            Esta seguro que desea eliminar esta Cancion no podra desahacer esta opcion
+	         </div></h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>
@@ -47,58 +44,37 @@ Lista de Prestamos
           </div>
         </div>
         <div class="box-body">
-        	<div class="row">
-        		<div class='col-sm-12'>
-					{!!Form::label('lblIdLugar', 'Lugar')!!}</br>
-					{!!Form::select('idlugar', ['-1' => 'Seleccionar Lugar']+ $lugar,null,['class'=>'form-control','id'=>'idlugar']);!!}</br>
+        	 <div class='row'>
+	        	<div class="col-sm-6">
+					{!!Form::label('lblSeccion', 'Seccion :')!!}
+					{!!Form::select('ddlSeccion',['-1'=>'Selecionar']+$Secciones ,$codsec,['class'=>'form-control','id'=>'ddlSeccion'])!!}</br>
 				</div>
-				<div class='col-sm-12'>
-					{!!Form::label('lblIdCliente', 'Cliente')!!}</br>
-					{!!Form::select('idcliente', ['-1' => 'Seleccionar Cliente']+ $clientes,null,['class'=>'form-control','id'=>'idcliente']);!!}</br>
+				<div class="col-sm-6">
+					<div id="idtema">{{$song->idcategoria}}</div>
+					{!!Form::label('lblTema', 'Tema :')!!}
+					{!!Form::select('idcategoria',['-1'=>'Selecionar'] ,null,['class'=>'form-control','id'=>'ddlTema'])!!}</br>
 				</div>
-				<div class='col-sm-12'>
-					{!!Form::label('lblFecha', 'Fecha')!!}</br>
-					<div class="input-group date">
-	                  <div class="input-group-addon">
-	                    <i class="fa fa-calendar"></i>
-	                  </div>
-	                  {!!Form::text('fecha',null, ['class'=>'form-control pull-right','id'=> 'datepicker'])!!}
-
-	                </div>
-	            	</br>
+	        </div>
+	        <div class='row'>
+	        	<div class="col-sm-12">
+					{!!Form::label('lblTitulo', 'Ingresar Titulo de la cancion: ')!!}
+					{!!Form::text('titulo',null, ['class'=>'form-control','placeholder'=>'Ingresar Titulo'])!!}</br>
 				</div>
-				<div class='col-sm-12'>
-					{!!Form::label('lblHora', 'Hora')!!}</br>
-					<div class="bootstrap-timepicker">
-		                <div class="form-group">
-		                  <div class="input-group">
-		                    <div class="input-group-addon">
-		                      <i class="fa fa-clock-o"></i>
-		                    </div>
-		                    <input name="hora" type="text" class="form-control timepicker">
-
-		                  </div>
-		                  <!-- /.input group -->
-		                </div>
-		                <!-- /.form group -->
-		            </div>
-	            	</br>
-				</div>
-
-				<div class='col-sm-2'>
-					{!!Form::label('lblMonto', 'Monto')!!}</br>
-					{!!Form::text('monto',null, ['class'=>'form-control','placeholder'=> 'Monto'])!!}
-				</div>
-				<div class='col-sm-2'>
-					{!!Form::label('lblInteres', 'Interes')!!}</br>
-					{!!Form::text('interes',null, ['class'=>'form-control','placeholder'=> 'Interes'])!!}
+	        </div>
+	        <div class='row'>
+				<div class="col-sm-12">
+					{!!Form::label('lblCuerpo', 'Ingresar Letra :')!!}
+					<div class="box-body pad">
+					{!!Form::textarea('cuerpo',null, ['class'=>'form-control','placeholder'=>'Ingresar cuerpo de la cancion','rows'=>'50', 'cols'=>'50','id'=>'editor1'])!!}</br>
+					</div>
 				</div>
 			</div>
+
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
         	{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
-        	<a href="{{route('prestamo.list')}}" class="btn btn btn-success">
+        	<a href="{{route('admin.cancion.index')}}" class="btn btn btn-success">
               Cancelar
 			</a>
         </div>
@@ -117,6 +93,10 @@ Lista de Prestamos
 <script src={{asset("plugins/datepicker/bootstrap-datepicker.js")}}></script>
 <!-- bootstrap time picker -->
 <script src={{asset("plugins/timepicker/bootstrap-timepicker.min.js")}}></script>
+<!-- WYSWIYG HTML editor  -->
+<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+<!-- Codigo para Dropdowlist dependientes -->
+<script src={{asset("js/codigo.js")}}></script>
 @stop
 
 @section('javascript')
@@ -124,12 +104,18 @@ Lista de Prestamos
 	//Date picker
 	    $('#datepicker').datepicker({
 	      autoclose: true,
-      	  format: "dd-mm-yyyy"
+      	  format: "yyyy-mm-dd"
 	    });
 	    // $('#datepicker').inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 	//Timepicker
 	    $(".timepicker").timepicker({
 	      showInputs: false
 	    });
+	// Funcion para editor de texto
+	  $(function () {
+	    // Replace the <textarea id="editor1"> with a CKEditor
+	    // instance, using default configuration.
+	    CKEDITOR.replace('editor1');
+	  });
 </script>
 @stop

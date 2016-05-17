@@ -14,7 +14,7 @@ Cancionero | Tuya es mi alabanza
 @stop
 
 @section('titulopagina')
-Administracion de Canciones
+Administracion de Secciones
 @stop
 
 @section('subtitulopagina')
@@ -28,11 +28,11 @@ Administracion de Canciones
         <div class="box-header with-border">
         	<a href="#" class="btn btn btn-warning" data-toggle="modal" data-target="#myModalCreateSong">
               <i class="fa fa fa-plus" ></i>
-              Nueva Cancion
+              Nueva Seccion
 			</a>
           <br>
           <br>
-          <h3 class="box-title">Lista de Canciones</h3>
+          <h3 class="box-title">Lista de Secciones</h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>
@@ -45,9 +45,8 @@ Administracion de Canciones
 			    <thead>
 				    <tr>
 				      <th>Nro</th>
-				      <th>Titulos</th>
-				      <th>Seccion</th>
-				      <th>Tema</th>
+				      <th>Nombre</th>
+				      <th>Estado</th>
 				      <th>Opciones</th>
 				    </tr>
 			    </thead>
@@ -59,9 +58,8 @@ Administracion de Canciones
 			      		<tr>
 			    	@endif
 			        <td>{{$lista->id}}</td>
-			        <td>{{$lista->titulo}}</td>
-			        <td>{{$lista->seccion}}</td>
-			        <td>{{$lista->tema}}</td>
+			        <td>{{$lista->nombre}}</td>
+			        <td>{{$lista->activo}}</td>
 
 			        <td>
 			            <a href="{{route('admin.cancion.edit',$lista->id)}}" class="btn btn-primary" >
@@ -81,9 +79,8 @@ Administracion de Canciones
 			    <tfoot>
 			    <tr>
 			      <th>Nro</th>
-			      <th>Titulos</th>
-			      <th>Seccion</th>
-			      <th>Tema</th>
+			      <th>Nombre</th>
+				  <th>Estado</th>
 			      <th>Opciones</th>
 			    </tr>
 			    </tfoot>
@@ -108,30 +105,7 @@ Administracion de Canciones
       </div>
       <div class="modal-body">
 
-        <div class='row'>
-        	<div class="col-sm-6">
-				{!!Form::label('lblSeccion', 'Seccion :')!!}
-				{!!Form::select('ddlSeccion',['-1'=>'Selecionar']+$Secciones ,null,['class'=>'form-control','id'=>'ddlSeccion'])!!}</br>
-			</div>
-			<div class="col-sm-6">
-				{!!Form::label('lblTema', 'Tema :')!!}
-				{!!Form::select('idcategoria',['-1'=>'Selecionar'] ,null,['class'=>'form-control','id'=>'ddlTema'])!!}</br>
-			</div>
-        </div>
-        <div class='row'>
-        	<div class="col-sm-12">
-				{!!Form::label('lblTitulo', 'Ingresar Titulo de la cancion: ')!!}
-				{!!Form::text('titulo',null, ['class'=>'form-control','placeholder'=>'Ingresar Titulo'])!!}</br>
-			</div>
-        </div>
-        <div class='row'>
-			<div class="col-sm-12">
-					{!!Form::label('lblCuerpo', 'Ingresar cuerpo :')!!}
-					<div class="box-body pad">
-					{!!Form::textarea('cuerpo',null, ['class'=>'form-control','placeholder'=>'Ingresar cuerpo de la cancion','rows'=>'50', 'cols'=>'50','id'=>'editor1'])!!}</br>
-					</div>
-				</div>
-			</div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
@@ -152,22 +126,12 @@ Administracion de Canciones
 <!-- DataTables -->
 <script src={{asset("plugins/datatables/jquery.dataTables.min.js")}}></script>
 <script src={{asset("plugins/datatables/dataTables.bootstrap.min.js")}}></script>
-<!-- WYSWIYG HTML editor  -->
-<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-<!-- Codigo para Dropdowlist dependientes -->
-<script src={{asset("js/codigo.js")}}></script>
 @stop
 @section('javascript')
 <script>
 	$('#myModalCreateSong').on('shown.bs.modal', function () {
 	  $('#myInput').focus()
 	})
-	// Funcion para editor de texto
-  $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    CKEDITOR.replace('editor1');
-  });
 
   $(function () {
     $('#tabla1').DataTable({
